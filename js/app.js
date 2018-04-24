@@ -25,6 +25,32 @@ function shuffle(array) {
     return array;
 }
 
+let symbols = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor","anchor","bolt","bolt",
+"cube","cube","leaf","leaf","bicycle","bicycle","bomb","bomb"];
+
+//Making the function for game restart
+let cardNames;
+
+function startGame()
+{
+   const container=document.querySelector('.container');
+   container.style.filter='';
+  const startPannel=document.querySelector('.initGame');
+  startPannel.remove();
+  shuffle(symbols);
+}
+
+ function initGame(){
+
+  const container=document.querySelector('.container');
+  const startPannel='<div class="initGame"><p class="game-title">Memory Game</p><p class="play-button">Play</p></div>';
+  document.body.insertAdjacentHTML('afterbegin',startPannel);
+  container.style.filter='blur(5px)';
+  const playButton=document.querySelector('.play-button');
+  playButton.addEventListener('click',startGame)
+}
+
+initGame();
 
 /*
  * set up the event listener for a card. If a card is clicked:

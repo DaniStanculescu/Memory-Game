@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco rel="stylesheet");
+
 html {
     box-sizing: border-box;
 }
@@ -14,6 +16,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+
 }
 
 body {
@@ -26,6 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
 
 h1 {
@@ -106,4 +110,34 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.initGame{
+   position:absolute;
+  margin-left: 25%;
+  height: 400px;
+  width: 600px;
+  margin-top: 20%;
+  background-color: #ffff;
+  z-index: 10;
+  text-align: center;
+  -webkit-box-shadow: 11px 9px 72px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 11px 9px 72px -7px rgba(0,0,0,0.75);
+  box-shadow: 11px 9px 72px -7px rgba(0,0,0,0.75);
+ -webkit-border-radius: 12px;
+ -moz-border-radius: 12px;
+  border-radius: 12px;
+
+}
+
+.play-button{
+  cursor: pointer;
+  font-size: 70px;
+  color: blue;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.game-title{
+  font-family: 'Sue Ellen Francisco',cursive;
+   font-size: 80px;
 }
