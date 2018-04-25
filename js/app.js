@@ -29,7 +29,26 @@ let symbols = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor","anc
 "cube","cube","leaf","leaf","bicycle","bicycle","bomb","bomb"];
 
 //Making the function for game restart
-let cardNames;
+let card=[];
+
+function makeCards()
+{
+
+  let cardSymbol=[];
+ const scorePan=document.querySelector('section');
+ scorePan.insertAdjacentHTML('afterend','<ul class="deck"></ul>');
+ const cardDeck=document.querySelector('.deck');
+
+  for(let i=1;i<17; i++)
+  {
+    card[i]=document.createElement('li');
+    card[i].setAttribute('class','card');
+    cardSymbol[i]=document.createElement('i');
+    cardSymbol[i].setAttribute('class',`fa fa-${symbols[i]}`);
+    card[i].appendChild(cardSymbol[i]);
+    cardDeck.appendChild(card[i]);
+  }
+}
 
 function startGame()
 {
@@ -38,6 +57,7 @@ function startGame()
   const startPannel=document.querySelector('.initGame');
   startPannel.remove();
   shuffle(symbols);
+  makeCards();
 }
 
  function initGame(){
@@ -47,10 +67,12 @@ function startGame()
   document.body.insertAdjacentHTML('afterbegin',startPannel);
   container.style.filter='blur(5px)';
   const playButton=document.querySelector('.play-button');
-  playButton.addEventListener('click',startGame)
+  playButton.addEventListener('click',startGame);
+
 }
 
 initGame();
+console.log(card);
 
 /*
  * set up the event listener for a card. If a card is clicked:
