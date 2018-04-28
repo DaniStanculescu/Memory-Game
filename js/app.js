@@ -126,12 +126,24 @@ function matches(){
 
 let moves=document.querySelector('.moves');
 moves.textContent=`${click}`;
-if(moves===10)
- {
+const ListOfSTars=document.querySelectorAll('.fa-star');
 
+ if(click===25)
+ {
+  ListOfSTars[2].classList.remove('fa-star');
+  ListOfSTars[2].classList.add('fa-thumbs-down');
+ }
+ if(click===30)
+ {
+   ListOfSTars[1].classList.remove('fa-star');
+   ListOfSTars[1].classList.add('fa-thumbs-down');
+ }
+ if(click===50)
+ {
+   ListOfSTars[0].classList.remove('fa-star');
+   ListOfSTars[0].classList.add('fa-thumbs-down');
 
  }
-
 }
 
 function startGame()
