@@ -34,10 +34,13 @@ let click=0; ///verify how many cards was clicked;
 let wasClicked=[];
 let elements=[];
 let match=0;///how many matches was made;
+const ListOfSTars=document.querySelectorAll('.fa-star');
+let moves=document.querySelector('.moves');
+moves.textContent=`${click}`;
 function makeCards()
 {
 
-  let cardSymbol=[];
+ let cardSymbol=[];
  const scorePan=document.querySelector('section');
  scorePan.insertAdjacentHTML('afterend','<ul class="deck"></ul>');
  const cardDeck=document.querySelector('.deck');
@@ -54,6 +57,7 @@ function makeCards()
     cardDeck.appendChild(card[i]);
     card[i].addEventListener('click',isClicked);
   }
+
 
 }
 
@@ -95,24 +99,24 @@ else  if(wasClicked.length==1)
       wasClicked=[];
       }
   else{
-      elements[1].style.backgroundColor='red';
-      elements[1].classList.add('shake');
-      elements[1].classList.add('animation');
-      elements[0].style.backgroundColor='red';
+     elements[1].style.backgroundColor='red';
+     elements[1].classList.add('shake');
+     elements[1].classList.add('animation');
+     elements[0].style.backgroundColor='red';
      elements[0].classList.add('shake');
      elements[0].classList.add('animation');
-    setTimeout(function()  {elem.classList.remove('shake');
-      elements[1].classList.remove('animation');
-      elements[1].classList.remove('open');
-      elements[1].classList.remove('show');
-      elements[1].style.backgroundColor='';
-      elements[0].classList.remove('shake');
-      elements[0].classList.remove('animation');
-      elements[0].classList.remove('open');
-      elements[0].classList.remove('show');
-      elements[0].style.backgroundColor='';
-       elements=[];
-       wasClicked=[];
+     setTimeout(function()  {elem.classList.remove('shake');
+     elements[1].classList.remove('animation');
+     elements[1].classList.remove('open');
+     elements[1].classList.remove('show');
+     elements[1].style.backgroundColor='';
+     elements[0].classList.remove('shake');
+     elements[0].classList.remove('animation');
+     elements[0].classList.remove('open');
+     elements[0].classList.remove('show');
+     elements[0].style.backgroundColor='';
+     elements=[];
+     wasClicked=[];
      },2000);
     }
 
@@ -124,21 +128,20 @@ matches();
 
 function matches(){
 
-let moves=document.querySelector('.moves');
-moves.textContent=`${click}`;
-const ListOfSTars=document.querySelectorAll('.fa-star');
 
- if(click===25)
+moves.textContent=`${click}`;
+
+ if(click===35)
  {
   ListOfSTars[2].classList.remove('fa-star');
   ListOfSTars[2].classList.add('fa-thumbs-down');
  }
- if(click===30)
+ if(click===45)
  {
    ListOfSTars[1].classList.remove('fa-star');
    ListOfSTars[1].classList.add('fa-thumbs-down');
  }
- if(click===50)
+ if(click===65)
  {
    ListOfSTars[0].classList.remove('fa-star');
    ListOfSTars[0].classList.add('fa-thumbs-down');
@@ -148,13 +151,29 @@ const ListOfSTars=document.querySelectorAll('.fa-star');
 
 function startGame()
 {
-   const container=document.querySelector('.container');
-   container.style.filter='';
+  const container=document.querySelector('.container');
+  container.style.filter='';
   const startPannel=document.querySelector('.initGame');
+  const restartButton=document.querySelector('.fa-repeat');
   startPannel.remove();
   shuffle(symbols);
+///Adding the reset button
   makeCards();
+  restartButton.addEventListener('click',resetCards);
 }
+
+ function resetCards()
+ {
+   card.forEach(function(elem){
+       elem.className='';
+       elem.classList.add('card');  
+   });
+   click=0;
+   wasClicked=[];
+   elements=[];
+   match=0;
+  moves.textContent=`${click}`;
+ }
 
  function initGame(){
 
