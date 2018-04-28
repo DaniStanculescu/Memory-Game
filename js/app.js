@@ -30,7 +30,10 @@ let symbols = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor","anc
 
 //Making the function for game restart
 let card=[];
-
+let click=0; ///verify how many cards was clicked;
+let wasClicked=[];
+let elements=[];
+let match=0;///how many matches was made;
 function makeCards()
 {
 
@@ -39,15 +42,96 @@ function makeCards()
  scorePan.insertAdjacentHTML('afterend','<ul class="deck"></ul>');
  const cardDeck=document.querySelector('.deck');
 
-  for(let i=1;i<17; i++)
+
+  for(let i=0;i<16; i++)
   {
+
     card[i]=document.createElement('li');
     card[i].setAttribute('class','card');
     cardSymbol[i]=document.createElement('i');
     cardSymbol[i].setAttribute('class',`fa fa-${symbols[i]}`);
     card[i].appendChild(cardSymbol[i]);
     cardDeck.appendChild(card[i]);
+    card[i].addEventListener('click',isClicked);
   }
+
+}
+
+function isClicked(){
+
+  let elem=this;
+  let elemntClass;
+
+  if(wasClicked.length==0)
+  {
+    elem.classList.add('open');
+    elem.classList.add('show');
+    elemntClass=elem.firstChild.className;
+    wasClicked.push(elemntClass);
+    elements.push(elem);
+    click++;
+  }
+else  if(wasClicked.length==1)
+  {
+    elem.classList.add('open');
+    elem.classList.add('show');
+    elemntClass=elem.firstChild.className;
+    elements.push(elem);
+    wasClicked.push(elemntClass);
+    click++;
+    if(wasClicked[0]===wasClicked[1])
+    {
+      elem.classList.remove('open');
+      elem.classList.remove('show');
+      elem.classList.add('match');
+      elements[0].classList.remove('open');
+      elements[0].classList.remove('show');
+      elements[0].classList.add('match');
+      elements[0].removeEventListener('click',isClicked);
+      elem.removeEventListener('click',isClicked);
+      click++;
+      match++;
+      elements=[];
+      wasClicked=[];
+      }
+  else{
+      elements[1].style.backgroundColor='red';
+      elements[1].classList.add('shake');
+      elements[1].classList.add('animation');
+      elements[0].style.backgroundColor='red';
+     elements[0].classList.add('shake');
+     elements[0].classList.add('animation');
+    setTimeout(function()  {elem.classList.remove('shake');
+      elements[1].classList.remove('animation');
+      elements[1].classList.remove('open');
+      elements[1].classList.remove('show');
+      elements[1].style.backgroundColor='';
+      elements[0].classList.remove('shake');
+      elements[0].classList.remove('animation');
+      elements[0].classList.remove('open');
+      elements[0].classList.remove('show');
+      elements[0].style.backgroundColor='';
+       elements=[];
+       wasClicked=[];
+     },2000);
+    }
+
+  }
+
+matches();
+
+}
+
+function matches(){
+
+let moves=document.querySelector('.moves');
+moves.textContent=`${click}`;
+if(moves===10)
+ {
+
+
+ }
+
 }
 
 function startGame()
@@ -71,8 +155,15 @@ function startGame()
 
 }
 
-initGame();
-console.log(card);
+initGame();///This function MUST BE THE FIRST FUNCTION;
+
+
+
+
+
+
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
