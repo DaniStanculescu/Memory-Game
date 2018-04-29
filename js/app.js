@@ -33,10 +33,15 @@ let card=[];
 let click=0; ///verify how many cards was clicked;
 let wasClicked=[];
 let elements=[];
-let match=0;///how many matches was made;
+let match=7;///how many matches was made;
 const ListOfSTars=document.querySelectorAll('.fa-star');
 let moves=document.querySelector('.moves');
 moves.textContent=`${click}`;
+let seconds=00;///the seconds for the timer;
+let minutes=0;///the minutes for the timer
+const scorePannel=document.querySelector('.score-panel');///score panne
+scorePannel.insertAdjacentHTML('afterbegin','<p></p>');
+const timePannel=document.querySelector('.score-panel p');
 function makeCards()
 {
 
@@ -85,14 +90,14 @@ else  if(wasClicked.length==1)
     click++;
     if(wasClicked[0]===wasClicked[1])
     {
-      elem.classList.remove('open');
-      elem.classList.remove('show');
-      elem.classList.add('match');
+      elements[1].classList.remove('open');
+      elements[1].classList.remove('show');
       elements[0].classList.remove('open');
       elements[0].classList.remove('show');
       elements[0].classList.add('match');
+      elements[1].classList.add('match');
       elements[0].removeEventListener('click',isClicked);
-      elem.removeEventListener('click',isClicked);
+      elements[1].removeEventListener('click',isClicked);
       click++;
       match++;
       elements=[];
@@ -123,8 +128,16 @@ else  if(wasClicked.length==1)
   }
 
 matches();
+if(match===8)
+{
+setTimeout(gameOver(),3000);
 
 }
+
+}
+
+
+
 
 function matches(){
 
@@ -151,6 +164,7 @@ moves.textContent=`${click}`;
 
 function startGame()
 {
+
   const container=document.querySelector('.container');
   container.style.filter='';
   const startPannel=document.querySelector('.initGame');
@@ -159,19 +173,41 @@ function startGame()
   shuffle(symbols);
 ///Adding the reset button
   makeCards();
+
   restartButton.addEventListener('click',resetCards);
+
+  if(match!==8)
+  {
+    timePannel.textContent='0';
+    setInterval(timeIt,1000);
+ }
+
 }
+
+function timeIt()
+{
+   seconds++;
+   if(seconds===60)
+   {
+     minutes++;
+     seconds=0;
+   }
+   timePannel.textContent=`${minutes}m:${seconds}s`;
+
+}
+
 
  function resetCards()
  {
    card.forEach(function(elem){
        elem.className='';
-       elem.classList.add('card');  
+       elem.classList.add('card');
    });
    click=0;
    wasClicked=[];
    elements=[];
    match=0;
+   time=0;
   moves.textContent=`${click}`;
  }
 

@@ -67,7 +67,7 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    transition: 1s;
+    transition: 0.5s;
 }
 
 
@@ -88,7 +88,7 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
-    transition: 1s;
+    -webkit-animation:rotation 2s;
 }
 
 /*
@@ -119,11 +119,11 @@ h1 {
 }
 
 .initGame{
-   position:absolute;
+  position:absolute;
   margin-left: 25%;
   height: 400px;
   width: 600px;
-  margin-top: 20%;
+  margin-top: 5%;
   background-color: #ffff;
   z-index: 10;
   text-align: center;
@@ -138,14 +138,14 @@ h1 {
 
 .play-button{
   cursor: pointer;
-  font-size: 70px;
+  font-size: 50px;
   color: blue;
-  font-family: 'Permanent Marker', cursive;
+
 }
 
 .game-title{
-  font-family: 'Sue Ellen Francisco',cursive;
-   font-size: 80px;
+
+   font-size: 60px;
 }
 /* Shake Animation for the cards when they don't match!!*/
 @-webkit-keyframes shake {
@@ -157,12 +157,58 @@ h1 {
    -webkit-animation-name: shake;
    animation-name: shake;
    transition: ;
-      }
+}
 
-  .animation {
+.animation {
 
-    -webkit-animation-duration: 2s;
-           animation-duration: 2s;
+    -webkit-animation-duration: 1.5s;
+           animation-duration: 1.5s;
            -webkit-animation-fill-mode: both;
            animation-fill-mode: both;
-        }
+}
+
+
+
+@-webkit-keyframes rotation{
+  from {
+  				-webkit-transform: rotate(0deg);
+  		}
+  		to {
+  				-webkit-transform: rotate(359deg);
+  		}
+}
+
+
+.gameOver{
+
+  position:absolute;
+  margin-left: 15%;
+  height: 500px;
+  width: 800px;
+  margin-top: 5%;
+  background-color: #ffff;
+  z-index: 10;
+  text-align: center;
+  -webkit-box-shadow: 11px 9px 72px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 11px 9px 72px -7px rgba(0,0,0,0.75);
+  box-shadow: 11px 9px 72px -7px rgba(0,0,0,0.75);
+ -webkit-border-radius: 12px;
+ -moz-border-radius: 12px;
+  border-radius: 12px;
+
+
+}
+.checked{
+  transition: opacity 1s ease-out;
+  transform: rotate(360deg);
+  transition: 3s;
+  color:green;
+  font-size:30px;
+
+}
+.won{
+  color:#2b6dd8;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
