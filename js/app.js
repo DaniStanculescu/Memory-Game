@@ -33,11 +33,11 @@ let card=[];
 let click=0; ///verify how many cards was clicked;
 let wasClicked=[];
 let elements=[];
-let match=7;///how many matches was made;
+let match=0;///how many matches was made;
 const ListOfSTars=document.querySelectorAll('.fa-star');
 let moves=document.querySelector('.moves');
 moves.textContent=`${click}`;
-let seconds=00;///the seconds for the timer;
+let seconds=0;///the seconds for the timer;
 let minutes=0;///the minutes for the timer
 const scorePannel=document.querySelector('.score-panel');///score panne
 scorePannel.insertAdjacentHTML('afterbegin','<p></p>');
@@ -130,13 +130,79 @@ else  if(wasClicked.length==1)
 matches();
 if(match===8)
 {
-setTimeout(gameOver(),3000);
+setTimeout(gameOver,2000);
 
 }
 
 }
+function gameOver()
+{
+    const container=document.querySelector('.container');
+    container.style.filter='blur(10px)';
+    const gameOverMenu=document.createElement('div');
+    gameOverMenu.setAttribute('class','gameOver');
+    document.body.insertAdjacentHTML('afterbegin','<div class="gameover"></div>');
+    const checkIcon=document.createElement('p');
+    const congratulationsText=document.createElement('p');
+    congratulationsText.setAttribute('class','won');
+    congratulationsText.textContent='YOU WON!';
+    const time=document.createElement('p');
+    time.textContent=`Time: ${minutes}:${seconds}`;
+    checkIcon.setAttribute('class','fa fa-check checked');
+    const moves=document.createElement('p');
+    moves.textContent=`Moves:${click}`;
+    const result=document.createElement('p');
+    const gameOverDiv=document.querySelector('.gameover');
+    const restartGame=document.createElement('button');
+    restartGame.textContent='Play Again';
+    gameOverDiv.appendChild(checkIcon);
+    gameOverDiv.appendChild(congratulationsText);
+    gameOverDiv.appendChild(time);
+    gameOverDiv.appendChild(moves);
+    if(click<=45)
+    {
+     result.textContent='Congratulations! You have such a good memory!!!';
 
+    }
+    else if(click>65&&click<=85)
+    {
+      result.textContent='Very good! You a have a good memory!'
+    }
+    else if(click>85)
+    {
+      result.textContent='Pretty good but I think you can do a better score';
+    }
+     gameOverDiv.appendChild(result);
+     gameOverDiv.appendChild(restartGame);
+     restartGame.addEventListener('click',restart)
+}
 
+function restart(){
+  const gameOver=document.querySelector('.gameover');
+  gameOver.remove();
+  const container=document.querySelector('.container');
+  container.style.filter='';
+  card.forEach(function(elem){
+      elem.className='';
+      elem.classList.add('card');
+  });
+  click=0;
+  wasClicked=[];
+  elements=[];
+  match=0;
+  seconds=0;
+  minutes=0;
+ moves.textContent=`${click}`;
+ const stars=document.querySelectorAll('.fa');
+ for(let star of stars)
+ {
+    if( star.classList.contains('fa-thumbs-down'))
+        {
+          star.classList.remove('fa-thumbs-down');
+          star.classList.add('fa-star');
+        }
+ }
+}
 
 
 function matches(){
@@ -144,17 +210,17 @@ function matches(){
 
 moves.textContent=`${click}`;
 
- if(click===35)
+ if(click===45)
  {
   ListOfSTars[2].classList.remove('fa-star');
   ListOfSTars[2].classList.add('fa-thumbs-down');
  }
- if(click===45)
+ if(click===65)
  {
    ListOfSTars[1].classList.remove('fa-star');
    ListOfSTars[1].classList.add('fa-thumbs-down');
  }
- if(click===65)
+ if(click===85)
  {
    ListOfSTars[0].classList.remove('fa-star');
    ListOfSTars[0].classList.add('fa-thumbs-down');
@@ -207,7 +273,8 @@ function timeIt()
    wasClicked=[];
    elements=[];
    match=0;
-   time=0;
+   seconds=0;
+   minutes=0;
   moves.textContent=`${click}`;
  }
 
